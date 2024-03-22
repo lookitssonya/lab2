@@ -1,0 +1,22 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    ifstream in("C:\\Users\\Журавлевы\\Desktop\\d.txt"); // открываем первый файл для чтения
+    const int n = 100;
+    int arr[n]; // создаем массив для хранения элементов файла
+    for (int i = 0; i < n; i++) { // считываем элементы файла в массив
+        in >> arr[i];
+    }
+
+    in.close();
+    // считаем сумму элементов на четных позициях
+    int sum = 0;
+    for (int i = 0; i < n; i += 2) {
+        sum += arr[i];
+    }
+    cout << "Сумма элементов на четных позициях: " << sum << endl;
+    return 0;
+}
