@@ -1,0 +1,60 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+
+using namespace std;
+
+struct JazzArtist {
+    string artist;
+    string album;
+    int copies;
+    int year;
+    double price;
+};
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    const int num_artists = 4;  // ввод данных исполнителей в массив структур
+    JazzArtist artists[num_artists];
+
+    for (int i = 0; i < num_artists; i++) {
+        cout << "Введите имя исполнителя " << i + 1 << ": " << endl;
+        cin >> artists[i].artist;
+        cout << "Введите название альбома исполнителя " << i + 1 << ": " << endl;
+        cin >> artists[i].album;
+        cout << "Введите тираж альбома исполнителя " << i + 1 << ": " << endl;
+        cin >> artists[i].copies;
+        cout << "Введите год выпуска альбома исполнителя " << i + 1 << ": " << endl;
+        cin >> artists[i].year;
+        cout << "Введите стоимость альбома исполнителя " << i + 1 << ": " << endl;
+        cin >> artists[i].price;
+    }
+
+    ofstream out("C:\\Users\\Журавлевы\\Desktop\\jazz_artists.bin", ios::binary); // запись массива структур в бинарный файл
+    for (int i = 0; i < num_artists; i++) {
+        out.write((char*)&artists[i], sizeof(JazzArtist));
+    }
+    out.close();
+
+    // Печать сведений об исполнителе, который в текущем году выпустил альбом тиражом более 1000 экземплярах по цене не менее 50 грн
+    int currentYear = 2024;
+    ifstream in("C:\\Users\\Журавлевы\\Desktop\\jazz_artists.bin", ios::binary);
+
+    bool found = false;
+    for (int i = 0; i < num_artists; i++) {
+        in.read((char*)&artists[i], sizeof(JazzArtist));
+        if (artists[i].year == currentYear && artists[i].copies > 1000 && artists[i].price >= 50) {
+            cout << "Исполнитель: " << artists[i].artist << endl;
+            cout << "Название альбома: " << artists[i].album << endl;
+            cout << "Тираж: " << artists[i].copies << endl;
+            cout << "Год выпуска: " << artists[i].year << endl;
+            cout << "Стоимость: " << artists[i].price << endl;
+            found = true;
+        }
+    }
+    in.close();
+    if (!found) {
+        cout << "Исполнителей, удовлетворяющих условиям, не найдено." << endl;
+    }
+    return 0;
+}
