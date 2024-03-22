@@ -1,0 +1,24 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+using namespace std;
+
+int main() {
+	setlocale(LC_ALL, "Russian");
+	ifstream in("C:\\Users\\Журавлевы\\Desktop\\a.txt"); //открываем файл для чтения 
+	double num;
+	int zeroCount = 0;
+	double positiveSum = 0;
+	while (in >> num) {
+		if (num == 0.0) {
+			zeroCount++;
+		}
+		else if (num > 0.0) {
+			positiveSum += num; 
+		}
+	}
+	in.close(); //закрываем файл
+	cout << "Количество нулевых элементов: " << zeroCount << endl;
+	cout << "Сумма положительных чисел: " << positiveSum << endl;
+	return 0;
+}
