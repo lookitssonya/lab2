@@ -1,0 +1,52 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
+#include <io.h>
+#include <fcntl.h>
+#include <codecvt>
+using namespace std;
+
+struct Country {
+    string name;
+    string capital;
+    string language;
+    int population;
+    double area;
+    string currency;
+    string governmentType;
+    string leader;
+};
+
+int main() {
+    _setmode(_fileno(stdout), _O_U16TEXT);
+    const locale utf16_locale = locale(locale(), new codecvt_utf8<wchar_t>());
+    setlocale(LC_ALL, "Russian");
+    ifstream inputFile("C:\\Users\\Журавлевы\\Desktop\\e.txt");
+    ofstream outputFile("C:\\Users\\Журавлевы\\Desktop\\e1.txt");
+    vector<Country> countries;
+    Country tempCountry;
+
+    while (inputFile >> tempCountry.name >> tempCountry.capital >> tempCoun-try.language >> tempCountry.population >> tempCountry.area >> tempCoun-try.currency >> tempCountry.governmentType >> tempCountry.leader) {
+        countries.push_back(tempCountry);
+    }
+
+    for (const Country& country : countries) {
+        if (country.population > 20000000) {
+            outputFile << "Название: " << country.name << endl
+                << "Столица: " << country.capital << endl
+                << "Государственный язык: " << country.language << endl
+                << "Население: " << country.population << endl
+                << "Площадь территории: " << country.area << endl
+                << "Денежная единица: " << country.currency << endl
+                << "Государственный строй: " << country.governmentType << endl
+                << "Глава государства: " << country.leader << endl;
+
+        }
+    }
+
+    inputFile.close();
+    outputFile.close();
+
+    return 0;
+}
