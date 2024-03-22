@@ -1,0 +1,40 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    ifstream in1("C:\\Users\\Журавлевы\\Desktop\\a1.txt"); //открываем первый файл для чтения 
+    double num1;
+    int negativeCount1 = 0;
+    while (in1 >> num1) {
+        if (num1 < 0) {
+            negativeCount1++;
+        }
+    }
+    in1.close();
+
+    ifstream in2("C:\\Users\\Журавлевы\\Desktop\\a2.txt"); //открываем второй файл для чтения 
+    double num2;
+    int negativeCount2 = 0;
+    while (in2 >> num2) {
+        if (num2 < 0) {
+            negativeCount2++;
+        }
+    }
+    in2.close(); //закрываем файл
+
+   
+    if (negativeCount1 > negativeCount2) {
+        cout << "В первом файле отрицательных элементов больше" << endl;
+    }
+    else if (negativeCount1 < negativeCount2) {
+        cout << "Во втором файле отрицательных элементов больше" << endl;
+    }
+    else {
+        cout << "Количество отрицательных элементов в файлах одинаково" << endl;
+    }
+
+    return 0;
+}
