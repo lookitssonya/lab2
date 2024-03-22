@@ -1,0 +1,66 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    const int rows = 5;
+    const int cols = 5;
+    int arr[rows][cols];
+    int arr1[rows][cols];
+
+    // Ввод значений в массив
+    cout << "Введите значения массива:" << endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cin >> arr[i][j];
+        }
+    }
+
+    // Запись массива в бинарный файл
+    ofstream out("C:\\Users\\Журавлевы\\Desktop\\array.bin", ios::binary);
+
+    for (int i = 0; i < rows; i++) {
+        out.write((char*)arr[i], sizeof(arr[i]));
+    }
+    out.close();
+
+    // Перезапись бинарного файла с увеличением элементов в каждой строке в два раза
+    ifstream in("C:\\Users\\Журавлевы\\Desktop\\array.bin", ios::binary);
+
+    ofstream out2("C:\\Users\\Журавлевы\\Desktop\\array_modified.bin", ios::binary);
+
+    for (int i = 0; i < rows; i++) {
+        in.read((char*)arr[i], sizeof(arr[i]));
+        for (int j = 0; j < cols; j++) {
+            arr1[i][j] = arr[i][j]*2;
+        }
+        out2.write((char*)arr[i], sizeof(arr[i]));
+    }
+    in.close();
+    out2.close();
+
+    // Печать массива до изменения данных в файле
+    cout << "Массив до изменения данных в файле:" << endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << arr[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    // Печать массива после изменения данных в файле
+    cout << "Массив после изменения данных в файле:" << endl;
+    ifstream in2("C:\\Users\\Журавлевы\\Desktop\\array_modified1.bin", ios::binary);
+
+    for (int i = 0; i < rows; i++) {
+        in2.read((char*)arr1[i], sizeof(arr[i]));
+        for (int j = 0; j < cols; j++) {
+            cout << arr1[i][j] << " ";
+        }
+        cout << endl;
+    }
+    in2.close();
+    return 0;
+}
