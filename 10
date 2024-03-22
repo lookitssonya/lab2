@@ -1,0 +1,49 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+
+using namespace std;
+
+struct Client {
+    string name;
+    double cost_4mbps;
+    int months_paid;
+    int months_paid_in_advance;
+};
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    const int num_clients = 3; // ввод данных клиентов в массив структур
+    Client clients[num_clients];
+
+    for (int i = 0; i < num_clients; i++) {
+        cout << "Введите фамилию клиента " << i + 1 << ": ";
+        cin >> clients[i].name;
+        cout << "Введите стоимость оплаты услуг интернет сети за месяц при скорости 4Мбит/сек для клиента " << i + 1 << ": ";
+        cin >> clients[i].cost_4mbps;
+        cout << "Введите количество месяцев оплаты за услуги интернет сети для клиента " << i + 1 << ": ";
+        cin >> clients[i].months_paid;
+        cout << "Введите количество месяцев оплаты вперед за услуги интернет сети для клиента " << i + 1 << ": ";
+        cin >> clients[i].months_paid_in_advance;
+    }
+
+    ofstream out("C:\\Users\\Журавлевы\\Desktop\\clients.bin", ios::binary); // запись массива структур в бинарный файл
+    for (int i = 0; i < num_clients; i++) {
+        out.write((char*)&clients[i], sizeof(Client));
+    }
+    out.close();
+
+    // Перезапись бинарного файла со снижением стоимости услуг интернет сети на 7% для скорости 4Мбит/сек, если клиент оплатил вперед за 3 месяца
+    ifstream in("C:\\Users\\Журавлевы\\Desktop\\clients.bin", ios::binary);
+    ofstream out2("C:\\Users\\Журавлевы\\Desktop\\clients_modified.bin", ios::binary);
+    for (int i = 0; i < num_clients; i++) {
+        in.read((char*)&clients[i], sizeof(Client));
+        if (clients[i].months_paid_in_advance >= 3) {
+            clients[i].cost_4mbps *= 0.93;
+        }
+        out2.write((char*)&clients[i], sizeof(Client));
+    }
+    in.close();
+    out2.close();
+    return 0;
+}
