@@ -22,8 +22,8 @@ int main() {
     _setmode(_fileno(stdout), _O_U16TEXT);
     const locale utf16_locale = locale(locale(), new codecvt_utf8<wchar_t>());
     setlocale(LC_ALL, "Russian");
-    ifstream inputFile("C:\\Users\\Журавлевы\\Desktop\\e.txt");
-    ofstream outputFile("C:\\Users\\Журавлевы\\Desktop\\e1.txt");
+    ifstream inputFile("e.txt");
+    ofstream outputFile("e1.txt");
     vector<Country> countries;
     Country tempCountry;
 
