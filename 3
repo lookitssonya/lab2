@@ -4,8 +4,8 @@
 using namespace std;
 
 int main() {
-    ifstream in("C:\\Users\\Журавлевы\\Desktop\\c.txt"); //открываем первый файл для чтения 
-    ofstream out("C:\\Users\\Журавлевы\\Desktop\\c1.txt"); //открываем файл для записи
+    ifstream in("c.txt"); //открываем первый файл для чтения 
+    ofstream out("c1.txt"); //открываем файл для записи
     char b;
     while (in.get(b)) {
         bool isdelimiter = (b == ' ' || b == '.' || b == ',' || b == ':' || b == ';'); //проверяем, является ли символ разделителем
