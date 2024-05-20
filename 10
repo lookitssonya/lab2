@@ -27,15 +27,15 @@ int main() {
         cin >> clients[i].months_paid_in_advance;
     }
 
-    ofstream out("C:\\Users\\Журавлевы\\Desktop\\clients.bin", ios::binary); // запись массива структур в бинарный файл
+    ofstream out("clients.bin", ios::binary); // запись массива структур в бинарный файл
     for (int i = 0; i < num_clients; i++) {
         out.write((char*)&clients[i], sizeof(Client));
     }
     out.close();
 
     // Перезапись бинарного файла со снижением стоимости услуг интернет сети на 7% для скорости 4Мбит/сек, если клиент оплатил вперед за 3 месяца
-    ifstream in("C:\\Users\\Журавлевы\\Desktop\\clients.bin", ios::binary);
-    ofstream out2("C:\\Users\\Журавлевы\\Desktop\\clients_modified.bin", ios::binary);
+    ifstream in("clients.bin", ios::binary);
+    ofstream out2("clients_modified.bin", ios::binary);
     for (int i = 0; i < num_clients; i++) {
         in.read((char*)&clients[i], sizeof(Client));
         if (clients[i].months_paid_in_advance >= 3) {
