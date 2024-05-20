@@ -30,7 +30,7 @@ int main() {
         cin >> artists[i].price;
     }
 
-    ofstream out("C:\\Users\\Журавлевы\\Desktop\\jazz_artists.bin", ios::binary); // запись массива структур в бинарный файл
+    ofstream out("jazz_artists.bin", ios::binary); // запись массива структур в бинарный файл
     for (int i = 0; i < num_artists; i++) {
         out.write((char*)&artists[i], sizeof(JazzArtist));
     }
@@ -38,7 +38,7 @@ int main() {
 
     // Печать сведений об исполнителе, который в текущем году выпустил альбом тиражом более 1000 экземплярах по цене не менее 50 грн
     int currentYear = 2024;
-    ifstream in("C:\\Users\\Журавлевы\\Desktop\\jazz_artists.bin", ios::binary);
+    ifstream in("jazz_artists.bin", ios::binary);
 
     bool found = false;
     for (int i = 0; i < num_artists; i++) {
