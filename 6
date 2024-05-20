@@ -3,7 +3,7 @@
 using namespace std;
 
 int main() {
-    ifstream in("C:\\Users\\Журавлевы\\Desktop\\f.txt"); //открываем первый файл для чтения 
+    ifstream in("f.txt"); //открываем первый файл для чтения 
     const int n = 150;
     
     double components[n]; // создаем массив для хранения компонентов файла
@@ -18,7 +18,7 @@ int main() {
         sum += components[i];
     }
 
-    ofstream out("C:\\Users\\Журавлевы\\Desktop\\f1.txt");
+    ofstream out("f1.txt");
     out << "Сумма компонентов файла: " << sum << endl;  // выводим сумму компонентов файла в выходной файл
     out.close();
     return 0;
